@@ -22,8 +22,12 @@
 
   let permutationTable = getRandomArray(255);
   const canvas = document.querySelectorAll("canvas")[0];
-  let perlinGrid = getPerlinGrid(canvas.clientHeight, canvas.clientWidth, permutationTable);
-  drawPerlin(canvas, perlinGrid)
+  let perlinGrid = getPerlinGrid(canvas.clientWidth, canvas.clientHeight, permutationTable);
+  drawPerlin(canvas, perlinGrid[0])
+  addEventListener("scroll", (event) => {
+    const scrollTop = document.documentElement.scrollTop;
+    drawPerlin(canvas, perlinGrid[Math.floor(scrollTop % canvas.clientHeight)])
+  });
 </script>
 
 </html>

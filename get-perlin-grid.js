@@ -1,5 +1,3 @@
-import { getRandomArray } from "./utils.js"
-
 /**
  *  Get constant vector by v
  *  @param {number} v
