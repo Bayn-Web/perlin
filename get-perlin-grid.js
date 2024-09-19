@@ -1,3 +1,5 @@
+import { getRandomArray } from "./utils.js"
+
 /**
  *  Get constant vector by v
  *  @param {number} v
@@ -84,21 +86,13 @@ function Noise2D(x, y, permutationTable) {
 }
 
 /**
- *  Get perlin grid,ordring height and width,optional size(the biggest value of grid)
+ *  Get perlin grid,ordring height and width
  * @param {number} height
  * @param {number} width
- * @param {number} size
+ * @param {number[]} permutationTable
  * @return {number[][]}
 */
-export const getPerlinGrid = (height, width, size = 255) => {
-  let permutationTable;
-  if (localStorage.getItem('perlin') == null) {
-    permutationTable = getRandomArray(size);
-    permutationTable = permutationTable.concat(permutationTable);
-    localStorage.setItem('perlin', JSON.stringify(permutationTable));
-  } else {
-    permutationTable = JSON.parse(localStorage.getItem('perlin'))
-  }
+export const getPerlinGrid = (height, width, permutationTable) => {
   let perlinGrid = [];
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {

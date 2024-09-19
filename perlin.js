@@ -1,14 +1,12 @@
 import { getRandomArray, adaptDPR } from './utils.js';
-import { getPerlinGrid } from "./get-perlin-grid.js"
-export const drawPerlin = function (ctxDom) {
+export const drawPerlin = function (ctxDom, perlinGrid) {
   let ctx = ctxDom.getContext('2d');
   adaptDPR(ctxDom, ctx);
-  const perlinGrid = getPerlinGrid(ctxDom.clientHeight, ctxDom.clientWidth, 255);
-  function renderGrid2(ctx, grid, width, height) {
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        let rgb = Math.round(255 * grid[x][y]);
-        if (grid[x][y] < 0.7)
+  function renderGrid(ctx, width, height) {
+    for (let y = 1; y < height - 1; y++) {
+      for (let x = 1; x < width - 1; x++) {
+        let rgb = Math.round(255 * perlinGrid[x][y]);
+        if (perlinGrid[x][y] < 0.7)
           ctx.fillStyle = `rgba(0,0,${rgb * 2},1.0)`;
         else
           ctx.fillStyle = `rgba(${rgb},${rgb},${rgb},1.0)`;
@@ -16,5 +14,5 @@ export const drawPerlin = function (ctxDom) {
       }
     }
   }
-  renderGrid2(ctx, perlinGrid, ctxDom.clientWidth, ctxDom.clientHeight)
+  renderGrid(ctx, ctxDom.clientWidth, ctxDom.clientHeight)
 };

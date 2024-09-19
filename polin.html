@@ -12,13 +12,18 @@
   </style>
 </head>
 
-<body style="overflow: hidden;display: flex;flex-direction: row;">
-  <canvas style="height: 100vh; width: 100vw;"></canvas>
+<body style="overflow-x: hidden;display: flex;flex-direction: row;height:200vh;">
+  <canvas style="height: 100vh; width: 100vw;position: fixed;top:0"></canvas>
 </body>
 <script type="module">
   import { drawPerlin } from "./perlin.js"
+  import { getPerlinGrid } from "./get-perlin-grid.js"
+  import { getRandomArray } from "./utils.js"
+
+  let permutationTable = getRandomArray(255);
   const canvas = document.querySelectorAll("canvas")[0];
-  drawPerlin(canvas)
+  let perlinGrid = getPerlinGrid(canvas.clientHeight, canvas.clientWidth, permutationTable);
+  drawPerlin(canvas, perlinGrid)
 </script>
 
 </html>
